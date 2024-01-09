@@ -6,9 +6,10 @@ const CommentArea = (props) => {
 
   const [comments, setComments ] = useState ([])
 
-  useEffect(() => (
+  useEffect(() => {
     getComments()
-  ), [props.bookId])
+    console.log(props.bookId)
+  }, [props.bookId])
 
 
  const aggiornaCommenti = () => {
@@ -49,7 +50,7 @@ const CommentArea = (props) => {
           <CommentsList reviews={comments} />
         </div>
         <div>
-          <AddComment bookId={props.bookId} aggiornaCommenti={aggiornaCommenti} />
+          <AddComment commento={props.bookId} aggiornaCommenti={aggiornaCommenti} />
         </div>
       </div>
     )

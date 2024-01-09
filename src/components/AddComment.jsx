@@ -1,11 +1,11 @@
 import { Button, Form } from 'react-bootstrap'
 import { useState } from 'react'
 
-const AddComment = ({ bookId, aggiornaCommenti }) => {
+const AddComment = ({ commento, aggiornaCommenti }) => {
   const [commentObject, setCommentObject] = useState({
     comment: '',
     rate: 1,
-    elementId: bookId,
+    elementId: commento,
   });
 
   const sendNewReview = async (e) => {
@@ -23,7 +23,7 @@ const AddComment = ({ bookId, aggiornaCommenti }) => {
           method: 'POST',
           headers: {
             Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTljMjljZGUwZGQxZDAwMTgyZDE4YjQiLCJpYXQiOjE3MDQ3MzMxMzMsImV4cCI6MTcwNTk0MjczM30.iQcrWjbTsWpnknSarl5aGt0OIZdVmCV9H_Zgypx-EKE',
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTczNzg5YmZlMDMxZTAwMTliYTFjNzkiLCJpYXQiOjE3MDQ4MDY2OTEsImV4cCI6MTcwNjAxNjI5MX0.11C0IO75d_FrHrNyQvZQ8zCGBdJp5K401T2byD0qAzA',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(commentObject),
@@ -37,7 +37,6 @@ const AddComment = ({ bookId, aggiornaCommenti }) => {
       } else {
         const error = await response.json();
         console.error('Error saving comment:', error);
-        console.log(commentObject)
       }
     } catch (error) {
       console.error('Error:', error);
@@ -52,7 +51,7 @@ const AddComment = ({ bookId, aggiornaCommenti }) => {
           type="text"
           value={commentObject.comment}
           onChange={(e) => {
-            setCommentObject({ ...commentObject, comment: e.target.value });
+            setCommentObject({ ...commentObject, comment: e.target.value, elementId:commento });
           }}
           required
         />
